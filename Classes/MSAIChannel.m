@@ -5,7 +5,7 @@
 #import "MSAIHelper.h"
 #import "MSAIPersistencePrivate.h"
 
-NSInteger const defaultMaxBatchCount = 50;
+NSInteger const defaultMaxBatchCount = 100;
 NSInteger const defaultBatchInterval = 15;
 
 NSInteger const debugMaxBatchCount = 5;
