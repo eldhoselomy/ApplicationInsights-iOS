@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   s.license          = { :type => 'MIT', :file => 'ApplicationInsights/LICENSE' }
   s.author           = { "Microsoft" => "appinsights-ios@microsoft.com" }
 
-  s.source           = { :http => "https://github.com/eldhoselomy/ApplicationInsights-iOS/releases/download/v#{s.version}/ApplicationInsights-#{s.version}.zip" }
+  s.source           = { :http => "https://github.com/eldhoselomy/ApplicationInsights-iOS/releases/download/#{s.version}/ApplicationInsights-#{s.version}.zip" }
   s.platform        = :ios, '6.0'
   s.requires_arc    = true
 

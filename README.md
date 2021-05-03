@@ -1,15 +1,6 @@
 [![Build Status](https://travis-ci.org/Microsoft/ApplicationInsights-iOS.svg?branch=master)](https://travis-ci.org/Microsoft/ApplicationInsights-iOS)
 
-# Application Insights for iOS (1.0-beta.8) DEPRECATED
-
-This SDK is officially deprecated. Please switch to [HockeyApp](https://hockeyapp.net) or consider [MobileCenter](https://www.visualstudio.com/vs/mobile-center/).
-
-You can find more about the transition from Application Insights to HockeyApp [here](https://www.hockeyapp.net/blog/2016/03/11/welcome-application-insights-users.html) and about how Mobile Center will be the future of HockeyApp [here](https://www.hockeyapp.net/blog/2016/11/16/mobile-center-next-generation-hockeyapp.html).
-
-Please don't hesitate to get in touch via [support@hockeyapp.net](mailto:support@hockeyapp.net) if you have questions.
-
-### About
-=======
+# Application Insights for iOS (1.0-beta.8)
 
 This is the repository of the iOS SDK for Application Insights. [Application Insights](http://azure.microsoft.com/services/application-insights/) is a service that monitors the performance and usage of your published app. The SDK enables you to send telemetry of various kinds (events, traces, sessions etc.) to the Application Insights service where your data can be visualized in the Azure Portal.
 
@@ -374,7 +365,7 @@ In the [Azure portal](https://portal.azure.com), open the application resource t
 
 The SDK also allows for some more advanced usages.
 
-### 7.1 Common Properties	
+### 7.1 Common Properties 
 
 It is also possible to set so-called "common properties" that will then be automatically attached to all telemetry data items.
 
