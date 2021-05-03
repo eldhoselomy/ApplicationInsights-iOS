@@ -86,6 +86,25 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (void)trackTraceWithMessage:(NSString *)message properties:(nullable NSDictionary *)properties;
 
+
+/**
+ *  Track  Dependancy by message.
+ *
+ *  @param message a message, which should be tracked.
+ */
++ (void)trackDependencyWithMessage:(NSString *)message;
+
+/**
+ *  Track with the message and custom properties.
+ *
+ *  @param message a message, which should be tracked.
+ *  @param properties key value pairs with additional info about the trace.
+ */
++ (void)trackDependencyWithMessage:(NSString *)message properties:(nullable NSDictionary *)properties;
+
+
+
+
 /**
  *  Track metric by name and value.
  *
@@ -165,6 +184,23 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param properties key value pairs with additional info about the trace.
  */
 - (void)trackTraceWithMessage:(NSString *)message properties:(nullable NSDictionary *)properties;
+
+/**
+ *  Track Dependencyby message.
+ *
+ *  @param message a message, which should be tracked.
+ */
+- (void)trackDependencyWithMessage:(NSString *)message;
+
+/**
+ *  Track with the message and custom properties.
+ *
+ *  @param message a message, which should be tracked.
+ *  @param properties key value pairs with additional info about the trace.
+ */
+- (void)trackDependencyWithMessage:(NSString *)message properties:(nullable NSDictionary *)properties;
+
+
 
 /**
  *  Track metric by name and value.

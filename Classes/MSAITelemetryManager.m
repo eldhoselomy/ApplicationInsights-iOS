@@ -25,6 +25,7 @@
 #import "MSAIContextHelperPrivate.h"
 #import "MSAISessionStateData.h"
 #import "MSAIOrderedDictionary.h"
+#import "MSAIRemoteDependencyData.h"
 
 static char *const MSAITelemetryEventQueue = "com.microsoft.ApplicationInsights.telemetryEventQueue";
 static char *const MSAICommonPropertiesQueue = "com.microsoft.ApplicationInsights.commonPropertiesQueue";
@@ -191,6 +192,34 @@ static char *const MSAICommonPropertiesQueue = "com.microsoft.ApplicationInsight
     typeof(self) strongSelf = weakSelf;
     MSAIMessageData *messageData = [MSAIMessageData new];
     [messageData setMessage:message];
+    [messageData setProperties:properties];
+    [strongSelf trackDataItem:messageData];
+  });
+}
+
+
++ (void)trackDependencyWithMessage:(NSString *)message{
+  [self trackDependencyWithMessage:message properties:nil];
+}
+
+- (void)trackDependencyWithMessage:(NSString *)message {
+  [self trackDependencyWithMessage:message properties:nil];
+}
+
+
++ (void)trackDependencyWithMessage:(NSString *)message properties:(nullable NSDictionary *)properties{
+  [[self sharedManager] trackTraceWithMessage:message properties:properties];
+}
+
+- (void)trackDependencyWithMessage:(NSString *)message properties:(NSDictionary *)properties {
+  __weak typeof(self) weakSelf = self;
+  dispatch_async(_telemetryEventQueue, ^{
+    if(!_managerInitialised) return;
+
+    typeof(self) strongSelf = weakSelf;
+    MSAIRemoteDependencyData *messageData = [MSAIRemoteDependencyData new];
+    [messageData setName: @"Network-Trace"];
+    [messageData setDependencyTypeName: @"iOS"];
     [messageData setProperties:properties];
     [strongSelf trackDataItem:messageData];
   });
