@@ -1,7 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "ApplicationInsights"
-  s.deprecated       = true
-  s.version          = "1.0-beta.8"
+  s.version          = "1.2"
   s.summary          = "Microsoft Application Insights SDK for iOS"
   s.description      = <<-DESC
                        Application Insights is a service that allows developers to keep their applications available, performant, and successful. 
@@ -11,8 +10,7 @@ Pod::Spec.new do |s|
   s.license          = { :type => 'MIT', :file => 'ApplicationInsights/LICENSE' }
   s.author           = { "Microsoft" => "appinsights-ios@microsoft.com" }
 
-  s.source           = { :http => "https://github.com/Microsoft/ApplicationInsights-iOS/releases/download/v#{s.version}/ApplicationInsights-#{s.version}.zip" }
-
+  s.source           = { :http => "https://github.com/eldhoselomy/ApplicationInsights-iOS/releases/download/v#{s.version}/ApplicationInsights-#{s.version}.zip" }
   s.platform        = :ios, '6.0'
   s.requires_arc    = true
 
