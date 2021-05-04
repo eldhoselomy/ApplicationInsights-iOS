@@ -24,19 +24,6 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype)sharedManager;
 
 
-/*
- * Threshold for sending data to the server. Default batch size for debugging is 150, for release
- * configuration, the batch size is 5.
- *
- * @warning: we advice to not set the batch size below 5 events.
- *
- *  @param batchSize Threshold for sending data to the server.
- *  @param senderInterval  Interval for sending data to the server in seconds.
- * Default: 5
- */
-+ (void)setBatchSize:(NSUInteger) batchSize senderInterval: (NSUInteger) senderInterval;
-
-
 ///-----------------------------------------------------------------------------
 /// @name Common Properties
 ///-----------------------------------------------------------------------------
@@ -56,6 +43,19 @@ NS_ASSUME_NONNULL_BEGIN
  *  @warning All of the values in this dictionary have to be NSJSONSerialization compatible!
  */
 @property (nonatomic, strong) NSDictionary *commonProperties;
+
+
+/*
+ * Threshold for sending data to the server. Default batch size for debugging is 150, for release
+ * configuration, the batch size is 5.
+ *
+ * @warning: we advice to not set the batch size below 5 events.
+ *
+ *  @param batchSize Threshold for sending data to the server.
+ *  @param senderInterval  Interval for sending data to the server in seconds.
+ * Default: 5
+ */
++ (void)setBatchSize:(NSUInteger) batchSize senderInterval: (NSUInteger) senderInterval;
 
 ///-----------------------------------------------------------------------------
 /// @name Track data
@@ -163,6 +163,20 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param properties key-value pairs which can contain additional information about the page view
  */
 + (void)trackPageView:(NSString *)pageName duration:(NSTimeInterval)duration properties:(nullable NSDictionary *)properties;
+
+
+
+/*
+ * Threshold for sending data to the server. Default batch size for debugging is 150, for release
+ * configuration, the batch size is 5.
+ *
+ * @warning: we advice to not set the batch size below 5 events.
+ *
+ *  @param batchSize Threshold for sending data to the server.
+ *  @param senderInterval  Interval for sending data to the server in seconds.
+ * Default: 5
+ */
+- (void)setBatchSize:(NSUInteger) batchSize senderInterval: (NSUInteger) senderInterval;
 
 /**
  *  Track the event by event name.

@@ -117,21 +117,6 @@ static char *const MSAICommonPropertiesQueue = "com.microsoft.ApplicationInsight
 }
 
 
-/*
- * Threshold for sending data to the server. Default batch size for debugging is 150, for release
- * configuration, the batch size is 5.
- *
- * @warning: we advice to not set the batch size below 5 events.
- *
- *  @param batchSize Threshold for sending data to the server.
- *  @param senderInterval  Interval for sending data to the server in seconds.
- * Default: 5
- */
-+ (void)setBatchSize:(NSUInteger) batchSize senderInterval: (NSUInteger) senderInterval {
-  [[MSAIChannel sharedChannel] setSenderInterval: senderInterval];
-  [[MSAIChannel sharedChannel] setSenderBatchSize: batchSize];
-}
-
 #pragma mark - Common Properties
 
 + (void)setCommonProperties:(NSDictionary *)commonProperties {
@@ -150,6 +135,26 @@ static char *const MSAICommonPropertiesQueue = "com.microsoft.ApplicationInsight
     properties = _commonProperties.copy;
   });
   return properties;
+}
+
+
+/*
+ * Threshold for sending data to the server. Default batch size for debugging is 150, for release
+ * configuration, the batch size is 5.
+ *
+ * @warning: we advice to not set the batch size below 5 events.
+ *
+ *  @param batchSize Threshold for sending data to the server.
+ *  @param senderInterval  Interval for sending data to the server in seconds.
+ * Default: 5
+ */
++ (void)setBatchSize:(NSUInteger) batchSize senderInterval: (NSUInteger) senderInterval {
+  [self setBatchSize:batchSize senderInterval: senderInterval];
+}
+
+- (void)setBatchSize:(NSUInteger) batchSize senderInterval: (NSUInteger) senderInterval {
+  [[MSAIChannel sharedChannel] setSenderInterval: senderInterval];
+  [[MSAIChannel sharedChannel] setSenderBatchSize: batchSize];
 }
 
 #pragma mark - Track data
