@@ -219,20 +219,11 @@ static char *const MSAICommonPropertiesQueue = "com.microsoft.ApplicationInsight
 }
 
 
-+ (void)trackDependencyWithMessage:(NSString *)message name:(NSString *)name success:(BOOL)success {
-  [self trackDependencyWithMessage:message  name: name success:success properties: nil];
++ (void)trackDependencyWithMessage:(NSString *)message id: (NSString *) id name:(NSString *)name success:(BOOL)success target: (NSString *) target resultCode: (NSString *) resultCode duration: (nullable NSString *) duration properties:(nullable NSDictionary *)properties{
+  [[self sharedManager] trackDependencyWithMessage: message id: id name: name success: success target: target resultCode: resultCode duration: duration properties: properties];
 }
 
-- (void)trackDependencyWithMessage:(NSString *)message name:(NSString *)name success:(BOOL)success {
-  [self trackDependencyWithMessage:message name: name success:success  properties: nil];
-}
-
-
-+ (void)trackDependencyWithMessage:(NSString *)message name:(NSString *)name success:(BOOL)success properties:(nullable NSDictionary *)properties{
-  [[self sharedManager] trackDependencyWithMessage:message name: name success:success properties:properties];
-}
-
-- (void)trackDependencyWithMessage:(NSString *)message name:(NSString *)name success:(BOOL)success properties:(NSDictionary *)properties {
+- (void)trackDependencyWithMessage:(NSString *)message id: (NSString *) id name:(NSString *)name success:(BOOL)success target: (NSString *) target resultCode: (NSString *) resultCode duration: (nullable NSString *) duration properties:(nullable NSDictionary *)properties{
   __weak typeof(self) weakSelf = self;
   dispatch_async(_telemetryEventQueue, ^{
     if(!_managerInitialised) return;
@@ -243,8 +234,16 @@ static char *const MSAICommonPropertiesQueue = "com.microsoft.ApplicationInsight
     [messageData setDependencyTypeName: @"iOS"];
     [messageData setCommandName:message];
     [messageData setSuccess:success];
+    
+    [messageData setTarget: target];
+    [messageData setResultCode: resultCode];
+    [messageData setDuration: duration];
+    [messageData setId: id];
+    
     [messageData setProperties:properties];
+    
     [strongSelf trackDataItem:messageData];
+    
   });
 }
 

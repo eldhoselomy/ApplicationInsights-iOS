@@ -101,14 +101,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)trackTraceWithMessage:(NSString *)message properties:(nullable NSDictionary *)properties;
 
 
-/**
- *  Track  Dependancy by message.
- *
- *  @param message a message, which should be tracked.
- *  @param name  name of the dependancy
- *  @param success  status of the dependancy
- */
-+ (void)trackDependencyWithMessage:(NSString *)message name:(NSString *)name success:(BOOL)success;
+
 
 /**
  *  Track with the message and custom properties.
@@ -118,7 +111,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param success  status of the dependancy
  *  @param properties key value pairs with additional info about the trace.
  */
-+ (void)trackDependencyWithMessage:(NSString *)message name:(NSString *)name success:(BOOL)success properties:(nullable NSDictionary *)properties;
++ (void)trackDependencyWithMessage:(NSString *)message id: (NSString *) id name:(NSString *)name success:(BOOL)success target: (NSString *) target resultCode: (NSString *) resultCode duration: (nullable NSString *) duration properties:(nullable NSDictionary *)properties;
 
   
   
@@ -217,14 +210,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)trackTraceWithMessage:(NSString *)message properties:(nullable NSDictionary *)properties;
 
-/**
- *  Track Dependencyby message.
- *
- *  @param message a message, which should be tracked.
- *  @param name  name of the dependancy
- *  @param success  status of the dependancy
- */
-- (void)trackDependencyWithMessage:(NSString *)message name:(NSString *)name success:(BOOL)success;
+
 
 /**
  *  Track with the message and custom properties.
@@ -234,7 +220,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param success  status of the dependancy
  *  @param properties key value pairs with additional info about the trace.
  */
-- (void)trackDependencyWithMessage:(NSString *)message name:(NSString *)name success:(BOOL)success properties:(nullable NSDictionary *)properties;
+- (void)trackDependencyWithMessage:(NSString *)message id: (NSString *) id name:(NSString *)name success:(BOOL)success target: (NSString *) target resultCode: (NSString *) resultCode duration: (nullable NSString *) duration properties:(nullable NSDictionary *)properties;
 
 
 

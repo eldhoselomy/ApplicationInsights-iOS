@@ -63,6 +63,20 @@
   if(self.properties != nil) {
     [dict setObject:self.properties forKey:@"properties"];
   }
+  
+  if(self.id != nil){
+    [dict setObject:self.id forKey:@"id"];
+  }
+  if(self.target != nil){
+    [dict setObject:self.target forKey:@"target"];
+  }
+  if(self.resultCode != nil){
+    [dict setObject:self.resultCode forKey:@"resultCode"];
+  }
+  if(self.duration != nil){
+    [dict setObject:self.duration forKey:@"duration"];
+  }
+  
   return dict;
 }
 
@@ -83,6 +97,11 @@
     _dependencySource = (MSAIDependencySourceType) [coder decodeIntForKey:@"self.dependencySource"];
     _commandName = [coder decodeObjectForKey:@"self.commandName"];
     _dependencyTypeName = [coder decodeObjectForKey:@"self.dependencyTypeName"];
+    
+    _target = [coder decodeObjectForKey:@"self.target"];
+    _resultCode = [coder decodeObjectForKey:@"self.resultCode"];
+    _duration = [coder decodeObjectForKey:@"self.duration"];
+    _id = [coder decodeObjectForKey:@"self.id"];
   }
 
   return self;
@@ -102,6 +121,12 @@
   [coder encodeInt:self.dependencySource forKey:@"self.dependencySource"];
   [coder encodeObject:self.commandName forKey:@"self.commandName"];
   [coder encodeObject:self.dependencyTypeName forKey:@"self.dependencyTypeName"];
+  
+  [coder encodeObject:self.target forKey:@"self.target"];
+  [coder encodeObject:self.resultCode forKey:@"self.resultCode"];
+  [coder encodeObject:self.duration forKey:@"self.duration"];
+  [coder encodeObject:self.id forKey:@"self.id"];
+  
 }
 
 

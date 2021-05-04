@@ -20,4 +20,10 @@
 @property (nonatomic, copy) NSString *commandName;
 @property (nonatomic, copy) NSString *dependencyTypeName;
 
+@property (nonatomic, copy) NSString *resultCode;
+@property (nonatomic, copy) NSString *id;
+@property (nonatomic, copy) NSString *duration;
+@property (nonatomic, copy) NSString *target;
+
+
 @end
