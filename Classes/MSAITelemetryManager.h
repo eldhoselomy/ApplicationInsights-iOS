@@ -23,6 +23,20 @@ NS_ASSUME_NONNULL_BEGIN
 */
 + (instancetype)sharedManager;
 
+
+/*
+ * Threshold for sending data to the server. Default batch size for debugging is 150, for release
+ * configuration, the batch size is 5.
+ *
+ * @warning: we advice to not set the batch size below 5 events.
+ *
+ *  @param batchSize Threshold for sending data to the server.
+ *  @param senderInterval  Interval for sending data to the server in seconds.
+ * Default: 5
+ */
++ (void)setBatchSize:(NSUInteger) batchSize senderInterval: (NSUInteger) senderInterval;
+
+
 ///-----------------------------------------------------------------------------
 /// @name Common Properties
 ///-----------------------------------------------------------------------------
@@ -91,19 +105,23 @@ NS_ASSUME_NONNULL_BEGIN
  *  Track  Dependancy by message.
  *
  *  @param message a message, which should be tracked.
+ *  @param name  name of the dependancy
+ *  @param success  status of the dependancy
  */
-+ (void)trackDependencyWithMessage:(NSString *)message;
++ (void)trackDependencyWithMessage:(NSString *)message name:(NSString *)name success:(BOOL)success;
 
 /**
  *  Track with the message and custom properties.
  *
  *  @param message a message, which should be tracked.
+ *  @param name  name of the dependancy
+ *  @param success  status of the dependancy
  *  @param properties key value pairs with additional info about the trace.
  */
-+ (void)trackDependencyWithMessage:(NSString *)message properties:(nullable NSDictionary *)properties;
++ (void)trackDependencyWithMessage:(NSString *)message name:(NSString *)name success:(BOOL)success properties:(nullable NSDictionary *)properties;
 
-
-
+  
+  
 
 /**
  *  Track metric by name and value.
@@ -189,16 +207,20 @@ NS_ASSUME_NONNULL_BEGIN
  *  Track Dependencyby message.
  *
  *  @param message a message, which should be tracked.
+ *  @param name  name of the dependancy
+ *  @param success  status of the dependancy
  */
-- (void)trackDependencyWithMessage:(NSString *)message;
+- (void)trackDependencyWithMessage:(NSString *)message name:(NSString *)name success:(BOOL)success;
 
 /**
  *  Track with the message and custom properties.
  *
  *  @param message a message, which should be tracked.
+ *  @param name  name of the dependancy
+ *  @param success  status of the dependancy
  *  @param properties key value pairs with additional info about the trace.
  */
-- (void)trackDependencyWithMessage:(NSString *)message properties:(nullable NSDictionary *)properties;
+- (void)trackDependencyWithMessage:(NSString *)message name:(NSString *)name success:(BOOL)success properties:(nullable NSDictionary *)properties;
 
 
 

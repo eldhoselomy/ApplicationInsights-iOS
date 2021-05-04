@@ -116,6 +116,22 @@ static char *const MSAICommonPropertiesQueue = "com.microsoft.ApplicationInsight
   _sessionEndedObserver = nil;
 }
 
+
+/*
+ * Threshold for sending data to the server. Default batch size for debugging is 150, for release
+ * configuration, the batch size is 5.
+ *
+ * @warning: we advice to not set the batch size below 5 events.
+ *
+ *  @param batchSize Threshold for sending data to the server.
+ *  @param senderInterval  Interval for sending data to the server in seconds.
+ * Default: 5
+ */
++ (void)setBatchSize:(NSUInteger) batchSize senderInterval: (NSUInteger) senderInterval {
+  [[MSAIChannel sharedChannel] setSenderInterval: senderInterval];
+  [[MSAIChannel sharedChannel] setSenderBatchSize: batchSize];
+}
+
 #pragma mark - Common Properties
 
 + (void)setCommonProperties:(NSDictionary *)commonProperties {
@@ -198,28 +214,30 @@ static char *const MSAICommonPropertiesQueue = "com.microsoft.ApplicationInsight
 }
 
 
-+ (void)trackDependencyWithMessage:(NSString *)message{
-  [self trackDependencyWithMessage:message properties:nil];
++ (void)trackDependencyWithMessage:(NSString *)message name:(NSString *)name success:(BOOL)success {
+  [self trackDependencyWithMessage:message  name: name success:success properties: nil];
 }
 
-- (void)trackDependencyWithMessage:(NSString *)message {
-  [self trackDependencyWithMessage:message properties:nil];
+- (void)trackDependencyWithMessage:(NSString *)message name:(NSString *)name success:(BOOL)success {
+  [self trackDependencyWithMessage:message name: name success:success  properties: nil];
 }
 
 
-+ (void)trackDependencyWithMessage:(NSString *)message properties:(nullable NSDictionary *)properties{
-  [[self sharedManager] trackTraceWithMessage:message properties:properties];
++ (void)trackDependencyWithMessage:(NSString *)message name:(NSString *)name success:(BOOL)success properties:(nullable NSDictionary *)properties{
+  [[self sharedManager] trackDependencyWithMessage:message name: name success:success properties:properties];
 }
 
-- (void)trackDependencyWithMessage:(NSString *)message properties:(NSDictionary *)properties {
+- (void)trackDependencyWithMessage:(NSString *)message name:(NSString *)name success:(BOOL)success properties:(NSDictionary *)properties {
   __weak typeof(self) weakSelf = self;
   dispatch_async(_telemetryEventQueue, ^{
     if(!_managerInitialised) return;
 
     typeof(self) strongSelf = weakSelf;
     MSAIRemoteDependencyData *messageData = [MSAIRemoteDependencyData new];
-    [messageData setName: @"Network-Trace"];
+    [messageData setName: name];
     [messageData setDependencyTypeName: @"iOS"];
+    [messageData setCommandName:message];
+    [messageData setSuccess:success];
     [messageData setProperties:properties];
     [strongSelf trackDataItem:messageData];
   });

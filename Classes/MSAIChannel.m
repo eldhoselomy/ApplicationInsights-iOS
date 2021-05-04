@@ -5,11 +5,11 @@
 #import "MSAIHelper.h"
 #import "MSAIPersistencePrivate.h"
 
-NSInteger const defaultMaxBatchCount = 100;
+NSInteger const defaultMaxBatchCount = 50;
 NSInteger const defaultBatchInterval = 15;
 
-NSInteger const debugMaxBatchCount = 5;
-NSInteger const debugBatchInterval = 3;
+NSInteger const debugMaxBatchCount = 100;
+NSInteger const debugBatchInterval = 15;
 
 static char *const MSAIDataItemsOperationsQueue = "com.microsoft.ApplicationInsights.senderQueue";
 char *MSAISafeJsonEventsString;
